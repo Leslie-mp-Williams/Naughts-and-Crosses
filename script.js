@@ -1,5 +1,4 @@
 const { forEach } = require("lodash");
-const { SIGWINCH } = require("constants");
 
 const player1 = document.querySelector("#player1"),
   player2 = document.querySelector("#player2"),
@@ -11,19 +10,25 @@ let gameboard = [null, null, null, null, null, null, null, null, null],
   playerscore2 = 0,
   drawCounter = 0;
 
+const setPlayer = () => {
+  prevClick = prevClick === null || prevClick === "O" ? "X" : "O";
+  return prevClick;
+};
+
 const constructor = () => {
   player1.innerHTML = `Player 1 Score: ${playerscore1}`;
   player2.innerHTML = `Player 2 Score: ${playerscore2}`;
-  window.alert("Player One goes first");
+  if (prevClick === "O") {
+    window.alert("Player One goes first");
+  } else if (prevClick === "X") {
+    window.alert("Player Two goes first");
+  } else {
+    window.alert("Player One goes first");
+  }
 };
 
 const disable = (e) => {
   e.target.disabled = true;
-};
-
-const setPlayer = () => {
-  prevClick = prevClick === null || prevClick === "O" ? "X" : "O";
-  return prevClick;
 };
 
 buttons.forEach((button) => {
